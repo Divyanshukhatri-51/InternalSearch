@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const fetchDocuments = createAsyncThunk(
   'documents/fetchDocuments',
   async () => {
-    const res = await fetch('http://localhost:5000/api/documents');
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/documents`);
     return res.json();
   }
 );
@@ -28,7 +28,7 @@ export const insertDocument = createAsyncThunk(
     // Attach file if present
     if (doc.file) formData.append('file', doc.file);
 
-     const response = await fetch('http://localhost:5000/api/documents', {
+     const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/documents`, {
       method: 'POST',
       headers: { 'Authorization': `Bearer ${token}` },
       body: formData,
